@@ -80,12 +80,13 @@ def get_ai_answer(question, doubt):
                     "Authorization": f"Bearer {or_key}",
                     "Content-Type": "application/json",
                 },
-                data=json.dumps({
+                json={
                     "model": "mistralai/mistral-7b-instruct:free",
                     "messages": [
                         {"role": "user", "content": f"Context: {question}\nDoubt: {doubt}\nAnswer in 3-5 lines as a career expert."}
                     ]
-                })
+                },
+                timeout=10
             )
             data = response.json()
             if 'choices' in data:
@@ -93,8 +94,10 @@ def get_ai_answer(question, doubt):
                     "answer": data['choices'][0]['message']['content'],
                     "source": "openrouter"
                 }
+            else:
+                print(f"OpenRouter API error: {data}")
         except Exception as e:
-            print(f"OpenRouter error: {e}")
+            print(f"OpenRouter exception: {e}")
 
     # STEP 5: Fallback
     return {

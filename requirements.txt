@@ -1,9 +1,10 @@
 fastapi
 uvicorn
-pdfplumber
+python-multipart
+python-dotenv
 sentence-transformers
 chromadb
-scikit-learn
-beautifulsoup4
+pypdf
+google-generativeai
 requests
-python-multipart
+pydantic
