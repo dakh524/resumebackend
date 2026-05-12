@@ -52,15 +52,17 @@ async def upload_resume(file: UploadFile = File(...)):
 
 from pydantic import BaseModel
 
+import chat
+
 class ChatRequest(BaseModel):
-    question: str
+    interview_question: str
     doubt: str
 
 @app.post("/chat")
 async def chat_with_ai(request: ChatRequest):
     try:
-        answer = rag.get_answer(request.question, request.doubt)
-        return {"answer": answer}
+        result = chat.get_ai_answer(request.interview_question, request.doubt)
+        return result
     except Exception as e:
         print(f"Chat error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
