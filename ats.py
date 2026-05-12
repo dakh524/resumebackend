@@ -1,7 +1,12 @@
 import pdfplumber
 import io
 import re
-from shared import model
+from sentence_transformers import SentenceTransformer, util
+import os
+
+# Load model once at top to prevent slowness
+print("Initializing ATS AI Model...")
+model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Predefined keyword lists for roles to help with extraction
 KEYWORDS_DB = {

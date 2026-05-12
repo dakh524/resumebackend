@@ -5,7 +5,6 @@ import uvicorn
 import ats
 import rag
 import os
-import requests as req
 
 app = FastAPI(title="ResumeAI API")
 
@@ -19,12 +18,15 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    if rag.collection.count() == 0:
-        print("ChromaDB empty. Loading data...")
-        rag.load_data_to_chroma()
-        print("Done loading!")
-    else:
-        print(f"ChromaDB ready: {rag.collection.count()} questions")
+    try:
+        if rag.collection.count() == 0:
+            print("ChromaDB empty. Loading data...")
+            rag.load_data_to_chroma()
+            print("Done loading!")
+        else:
+            print(f"ChromaDB ready: {rag.collection.count()} questions")
+    except Exception as e:
+        print(f"Startup error: {e}")
 
 @app.get("/")
 async def root():
@@ -33,7 +35,10 @@ async def root():
 @app.post("/upload")
 async def upload_resume(file: UploadFile = File(...)):
     if not file.filename.endswith('.pdf'):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported")
+        raise HTTPException(
+            status_code=400,
+            detail="Only PDF files are supported"
+        )
     try:
         content = await file.read()
         analysis = ats.analyze_resume(content)
@@ -49,8 +54,11 @@ async def upload_resume(file: UploadFile = File(...)):
             "linkedin_tips": tips
         }
     except Exception as e:
-        print(f"Error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Upload error: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
 
 class ChatRequest(BaseModel):
     interview_question: str = ""
@@ -61,35 +69,33 @@ async def chat(request: ChatRequest):
     doubt = request.doubt
     question = request.interview_question
 
-    # Step 1: RAG
+    # Step 1: RAG - Your data first
     try:
-        from rag import collection, model
-        results = collection.query(
+        results = rag.collection.query(
             query_texts=[f"{question} {doubt}"],
             n_results=3
         )
-        if results['documents'] and results['documents'][0]:
-            docs = results['documents'][0]
-            if docs and len(docs[0]) > 50:
-                return {
-                    "answer": docs[0],
-                    "source": "rag"
-                }
+        docs = results['documents'][0]
+        if docs and len(docs[0]) > 50:
+            return {
+                "answer": docs[0],
+                "source": "rag"
+            }
     except Exception as e:
         print(f"RAG error: {e}")
 
-    # Step 2: Gemini
+    # Step 2: Gemini API
     try:
         import google.generativeai as genai
         genai.configure(
-            api_key=os.environ.get("GEMINI_API_KEY","")
+            api_key=os.environ.get("GEMINI_API_KEY", "")
         )
         m = genai.GenerativeModel("gemini-1.5-flash")
         prompt = f"""You are a career and interview expert.
-Answer only resume and interview questions.
-Context: {question}
-Doubt: {doubt}
-Answer in 3-5 clear lines."""
+Only answer resume and interview related questions.
+Context question: {question}
+Student doubt: {doubt}
+Give a clear helpful answer in 3-5 lines."""
         response = m.generate_content(prompt)
         return {
             "answer": response.text,
@@ -98,25 +104,29 @@ Answer in 3-5 clear lines."""
     except Exception as e:
         print(f"Gemini error: {e}")
 
-    # Step 3: OpenRouter
+    # Step 3: OpenRouter API
     try:
+        import requests as req
         r = req.post(
             "https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": f"Bearer {os.environ.get('OPENROUTER_API_KEY','')}",
+                "Authorization": f"Bearer {os.environ.get('OPENROUTER_API_KEY', '')}",
                 "Content-Type": "application/json"
             },
             json={
                 "model": "mistralai/mistral-7b-instruct:free",
                 "messages": [{
                     "role": "user",
-                    "content": f"Interview doubt: {doubt}. Context: {question}. Answer in 3-5 lines."
+                    "content": f"Answer this interview doubt in 3-5 lines. Doubt: {doubt}. Context: {question}"
                 }]
             },
             timeout=10
         )
         answer = r.json()['choices'][0]['message']['content']
-        return {"answer": answer, "source": "openrouter"}
+        return {
+            "answer": answer,
+            "source": "openrouter"
+        }
     except Exception as e:
         print(f"OpenRouter error: {e}")
 
