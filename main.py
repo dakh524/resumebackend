@@ -20,9 +20,9 @@ async def startup_event():
     if rag.collection.count() == 0:
         print("ChromaDB empty. Loading data...")
         rag.load_data_to_chroma()
-        print("Data loaded successfully!")
+        print("Done loading!")
     else:
-        print(f"ChromaDB ready with {rag.collection.count()} questions.")
+        print(f"ChromaDB ready: {rag.collection.count()} questions")
 
 @app.get("/")
 async def root():
