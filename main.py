@@ -50,6 +50,21 @@ async def upload_resume(file: UploadFile = File(...)):
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+from pydantic import BaseModel
+
+class ChatRequest(BaseModel):
+    question: str
+    doubt: str
+
+@app.post("/chat")
+async def chat_with_ai(request: ChatRequest):
+    try:
+        answer = rag.get_answer(request.question, request.doubt)
+        return {"answer": answer}
+    except Exception as e:
+        print(f"Chat error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)

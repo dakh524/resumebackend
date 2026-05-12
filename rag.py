@@ -78,6 +78,34 @@ def get_linkedin_tips(role):
     else:
         return tips["Business"]
 
+def get_answer(question, doubt):
+    # Find the most relevant context from our database
+    results = collection.query(
+        query_texts=[f"{question} {doubt}"],
+        n_results=1
+    )
+    
+    if not results['documents'] or len(results['documents'][0]) == 0:
+        return "I'm sorry, I don't have specific data on that topic yet. However, generally speaking, this relates to core engineering principles. Could you clarify which part is confusing?"
+
+    matched_q = results['documents'][0][0]
+    
+    # Simulate a high-quality explanation based on the matched topic
+    explanations = {
+        "Python": "Python is a high-level interpreted language. The GIL (Global Interpreter Lock) ensures only one thread executes at a time, which simplifies memory management but can limit multi-core performance.",
+        "Java": "Java is a class-based, object-oriented language. It runs on the JVM, providing platform independence ('Write Once, Run Anywhere').",
+        "React": "React is a JavaScript library for building user interfaces. It uses a Virtual DOM to optimize rendering and state management.",
+        "Data Science": "Data Science involves extracting insights from data using statistics, machine learning, and visualization techniques.",
+        "Electronics": "This involves the study of electron flow in circuits, utilizing components like transistors, diodes, and microcontrollers to process signals."
+    }
+
+    # Find a keyword match for the explanation
+    for key, text in explanations.items():
+        if key.lower() in matched_q.lower() or key.lower() in doubt.lower():
+            return f"Regarding '{matched_q}': {text} For your specific doubt '{doubt}', I recommend focusing on the fundamental implementation details."
+
+    return f"Great question! '{matched_q}' is a common interview topic. To address your doubt about '{doubt}', you should focus on how this concept solves specific technical challenges in real-world projects."
+
 if __name__ == "__main__":
     # If run directly, initialize the DB
     load_data_to_chroma()
