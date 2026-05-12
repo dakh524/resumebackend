@@ -1,10 +1,7 @@
 import chromadb
 import json
 import os
-from sentence_transformers import SentenceTransformer
-
-# Initialize Model
-model = SentenceTransformer('all-MiniLM-L6-v2')
+from shared import model
 
 # Initialize ChromaDB
 client = chromadb.PersistentClient(path="./chroma_db")

@@ -1,11 +1,7 @@
 import pdfplumber
 import io
 import re
-from sentence_transformers import SentenceTransformer, util
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
-
-model = SentenceTransformer('all-MiniLM-L6-v2')
+from shared import model
 
 # Predefined keyword lists for roles to help with extraction
 KEYWORDS_DB = {
