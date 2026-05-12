@@ -51,14 +51,12 @@ async def upload_resume(file: UploadFile = File(...)):
         role = analysis["role"]
         questions = rag.get_questions(role, top_k=10)
         tips = rag.get_linkedin_tips(role)
-        return {
-            "ats_score": analysis["ats_score"],
-            "role": role,
-            "matched_keywords": analysis["matched_keywords"],
-            "missing_keywords": analysis["missing_keywords"],
-            "interview_questions": questions,
-            "linkedin_tips": tips
-        }
+        
+        # Merge all data into the response
+        response = {**analysis}
+        response["interview_questions"] = questions
+        response["linkedin_tips"] = tips
+        return response
     except Exception as e:
         print(f"Upload error: {e}")
         raise HTTPException(
