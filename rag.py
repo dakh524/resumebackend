@@ -42,9 +42,11 @@ def load_data_to_chroma():
 
 def get_questions(role, top_k=10):
     # Query ChromaDB based on role and text similarity
-    # Use a more descriptive query to get better matches
+    query_text = f"Technical interview questions for a {role} professional"
+    query_embedding = model.encode([query_text]).tolist()
+    
     results = collection.query(
-        query_texts=[f"Technical interview questions for a {role} professional"],
+        query_embeddings=query_embedding,
         n_results=top_k
     )
     
@@ -89,8 +91,11 @@ def get_linkedin_tips(role):
 
 def get_answer(question, doubt):
     # Find the most relevant context from our database
+    query_text = f"{question} {doubt}"
+    query_embedding = model.encode([query_text]).tolist()
+
     results = collection.query(
-        query_texts=[f"{question} {doubt}"],
+        query_embeddings=query_embedding,
         n_results=1
     )
     
