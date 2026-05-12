@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pdfplumber
+sentence-transformers
+chromadb
+scikit-learn
+beautifulsoup4
+requests
+python-multipart

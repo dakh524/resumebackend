@@ -1,0 +1,62 @@
+[
+    {
+        "role": "Python Developer",
+        "questions": [
+            "What is the difference between list and tuple?",
+            "Explain decorators in Python.",
+            "How does memory management work in Python?",
+            "What are generators and how do they differ from iterators?",
+            "Explain the Global Interpreter Lock (GIL).",
+            "What is the difference between deep copy and shallow copy?",
+            "How do you handle exceptions in Python?",
+            "Explain the use of 'self' in Python classes.",
+            "What are lambda functions?",
+            "How do you use virtual environments in Python?"
+        ]
+    },
+    {
+        "role": "Java Developer",
+        "questions": [
+            "Explain the JVM architecture.",
+            "What is the difference between JDK, JRE, and JVM?",
+            "Explain the concept of Abstraction in Java.",
+            "What is a HashMap and how does it work?",
+            "Explain the difference between interface and abstract class.",
+            "What are the different types of inheritance in Java?",
+            "Explain the 'final' keyword in Java.",
+            "What is the use of the 'super' keyword?",
+            "How does garbage collection work in Java?",
+            "Explain Method Overloading vs Method Overriding."
+        ]
+    },
+    {
+        "role": "React Developer",
+        "questions": [
+            "What is the Virtual DOM?",
+            "Explain the difference between Functional and Class components.",
+            "What are React Hooks?",
+            "Explain the useEffect hook lifecycle.",
+            "How do you manage state in React?",
+            "What is Redux and when should you use it?",
+            "Explain the difference between props and state.",
+            "What are Higher Order Components (HOC)?",
+            "How do you optimize performance in a React app?",
+            "What is the purpose of keys in React lists?"
+        ]
+    },
+    {
+        "role": "Data Scientist",
+        "questions": [
+            "What is the difference between Supervised and Unsupervised learning?",
+            "Explain the concept of Overfitting and how to prevent it.",
+            "What is a P-value and what does it represent?",
+            "Explain the difference between L1 and L2 regularization.",
+            "What is a Confusion Matrix?",
+            "How do you handle missing data in a dataset?",
+            "Explain the Central Limit Theorem.",
+            "What is the difference between Type I and Type II errors?",
+            "How does a Random Forest algorithm work?",
+            "What are the assumptions of Linear Regression?"
+        ]
+    }
+]
