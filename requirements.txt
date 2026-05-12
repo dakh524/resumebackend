@@ -9,3 +9,5 @@ google-generativeai
 requests
 pydantic
 pdfplumber
+scikit-learn
+numpy
