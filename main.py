@@ -16,6 +16,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+async def startup_event():
+    from rag import load_data_to_chroma, collection
+    try:
+        if collection.count() == 0:
+            print("ChromaDB is empty. Loading data from scraped_data.json...")
+            load_data_to_chroma()
+        else:
+            print(f"ChromaDB already contains {collection.count()} items.")
+    except Exception as e:
+        print(f"Startup error: {e}")
+
 @app.get("/")
 async def root():
     return {"message": "ResumeAI Backend is Running"}

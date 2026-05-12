@@ -47,8 +47,7 @@ def get_questions(role, top_k=10):
     # Query ChromaDB based on role and text similarity
     results = collection.query(
         query_texts=[f"interview questions for {role}"],
-        n_results=top_k,
-        where={"role": role}
+        n_results=top_k
     )
     return results['documents'][0] if results['documents'] else []
 

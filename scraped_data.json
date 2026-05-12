@@ -11,7 +11,17 @@
             "How do you handle exceptions in Python?",
             "Explain the use of 'self' in Python classes.",
             "What are lambda functions?",
-            "How do you use virtual environments in Python?"
+            "How do you use virtual environments in Python?",
+            "What is the difference between range and xrange?",
+            "Explain the concept of monkey patching.",
+            "How do you handle multithreading in Python?",
+            "What is a dictionary comprehension?",
+            "Explain the 'is' and '==' operators.",
+            "What is a metaclass?",
+            "How do you use the 'with' statement?",
+            "Explain the difference between *args and **kwargs.",
+            "What is the purpose of the __init__ method?",
+            "How do you profile a Python script?"
         ]
     },
     {
@@ -26,7 +36,17 @@
             "Explain the 'final' keyword in Java.",
             "What is the use of the 'super' keyword?",
             "How does garbage collection work in Java?",
-            "Explain Method Overloading vs Method Overriding."
+            "Explain Method Overloading vs Method Overriding.",
+            "What is the difference between String, StringBuilder, and StringBuffer?",
+            "Explain the concept of Exception Handling in Java.",
+            "What is a Singleton class and how do you implement it?",
+            "Explain the difference between wait() and sleep().",
+            "What is the purpose of the 'static' keyword?",
+            "Explain the Java Collections Framework.",
+            "What is a thread pool and how do you use it?",
+            "Explain the difference between Checked and Unchecked exceptions.",
+            "What is the use of the 'volatile' keyword?",
+            "Explain the concept of Generics in Java."
         ]
     },
     {
@@ -41,7 +61,17 @@
             "Explain the difference between props and state.",
             "What are Higher Order Components (HOC)?",
             "How do you optimize performance in a React app?",
-            "What is the purpose of keys in React lists?"
+            "What is the purpose of keys in React lists?",
+            "Explain React Context API.",
+            "What is React Fragment and why use it?",
+            "Explain the difference between controlled and uncontrolled components.",
+            "What are Error Boundaries in React?",
+            "How do you handle routing in React?",
+            "What is the use of useMemo and useCallback hooks?",
+            "Explain Server-Side Rendering (SSR) vs Client-Side Rendering (CSR).",
+            "What is the purpose of prop-types?",
+            "How do you handle forms in React?",
+            "What is the difference between React and React Native?"
         ]
     },
     {
@@ -56,7 +86,67 @@
             "Explain the Central Limit Theorem.",
             "What is the difference between Type I and Type II errors?",
             "How does a Random Forest algorithm work?",
-            "What are the assumptions of Linear Regression?"
+            "What are the assumptions of Linear Regression?",
+            "Explain the Bias-Variance tradeoff.",
+            "What is Cross-Validation and why is it important?",
+            "Explain Gradient Descent.",
+            "What is the difference between Bagging and Boosting?",
+            "Explain PCA (Principal Component Analysis).",
+            "What is a ROC curve?",
+            "How do you deal with imbalanced datasets?",
+            "Explain the K-Means clustering algorithm.",
+            "What is the purpose of a Validation Set?",
+            "Explain A/B testing."
+        ]
+    },
+    {
+        "role": "Software Engineer",
+        "questions": [
+            "What is the difference between a Process and a Thread?",
+            "Explain the SOLID principles of Object Oriented Design.",
+            "How does a RESTful API work?",
+            "Explain the difference between SQL and NoSQL databases.",
+            "What is a deadlock and how do you prevent it?",
+            "Explain the concept of Microservices architecture.",
+            "What is the difference between Unit Testing and Integration Testing?",
+            "How do you handle scalability in a distributed system?",
+            "Explain the CAP theorem.",
+            "What is the purpose of a Load Balancer?",
+            "Explain the difference between vertical and horizontal scaling.",
+            "What is Docker and how does it work?",
+            "Explain the concept of Continuous Integration/Continuous Deployment (CI/CD).",
+            "What is a design pattern? Name a few.",
+            "How do you manage version control with Git?",
+            "Explain the difference between TCP and UDP.",
+            "What is a cache and how does it improve performance?",
+            "Explain the difference between symmetric and asymmetric encryption.",
+            "What is the purpose of an Index in a database?",
+            "How do you perform code reviews effectively?"
+        ]
+    },
+    {
+        "role": "Electronics Engineer",
+        "questions": [
+            "Explain Ohm's Law and its applications.",
+            "What is the difference between an Analog and a Digital signal?",
+            "Explain the working of a Transistor as a switch.",
+            "What is the purpose of an Operational Amplifier (Op-Amp)?",
+            "Explain the difference between Microprocessor and Microcontroller.",
+            "What is a PCB and how is it designed?",
+            "Explain the concept of Pulse Width Modulation (PWM).",
+            "What are the different types of filters in electronics?",
+            "Explain the working of a Diode.",
+            "What is the difference between a BJT and a MOSFET?",
+            "Explain the concept of feedback in electronic circuits.",
+            "What is a Flip-Flop and what are its types?",
+            "Explain the working of an ADC (Analog-to-Digital Converter).",
+            "What is the purpose of a Capacitor in a circuit?",
+            "Explain the difference between Series and Parallel circuits.",
+            "What is an embedded system?",
+            "Explain the concept of signal processing.",
+            "What are the different types of modulation techniques?",
+            "Explain the working of a Rectifier.",
+            "What is the use of an Oscilloscope?"
         ]
     }
 ]
