@@ -18,21 +18,21 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    print("🚀 Backend starting up...")
+    print("Backend starting up...")
     try:
         count = rag.collection.count()
-        print(f"📊 Current ChromaDB count: {count}")
+        print(f"Current ChromaDB count: {count}")
         if count == 0:
             if os.path.exists("scraped_data.json"):
-                print("📥 Seeding database from scraped_data.json...")
+                print("Seeding database from scraped_data.json...")
                 rag.load_data_to_chroma()
-                print(f"✅ Seeding complete! Total questions: {rag.collection.count()}")
+                print(f"Seeding complete! Total questions: {rag.collection.count()}")
             else:
-                print("⚠️ Warning: scraped_data.json not found. Database will be empty.")
+                print("Warning: scraped_data.json not found. Database will be empty.")
         else:
-            print(f"✅ ChromaDB ready with {count} questions.")
+            print(f"ChromaDB ready with {count} questions.")
     except Exception as e:
-        print(f"❌ Startup error: {e}")
+        print(f"Startup error: {e}")
 
 @app.get("/")
 async def root():
