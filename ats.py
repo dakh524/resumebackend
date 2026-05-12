@@ -14,15 +14,28 @@ KEYWORDS_DB = {
     "React Developer": ["React", "JavaScript", "TypeScript", "Redux", "Tailwind", "HTML", "CSS"],
     "Data Scientist": ["Python", "R", "Machine Learning", "Statistics", "Scikit-learn", "TensorFlow"],
     "ML Engineer": ["PyTorch", "TensorFlow", "Keras", "Model Deployment", "MLOps", "Computer Vision"],
-    "Software Engineer": ["Algorithms", "Data Structures", "System Design", "OOP", "Testing", "Agile"]
+    "Software Engineer": ["Algorithms", "Data Structures", "System Design", "OOP", "Testing", "Agile"],
+    "Frontend Developer": ["HTML", "CSS", "JavaScript", "Vue", "Angular", "SASS", "Webpack"],
+    "Backend Developer": ["Node.js", "Express", "PostgreSQL", "MongoDB", "Redis", "Docker", "API"],
+    "DevOps Engineer": ["Docker", "Kubernetes", "AWS", "CI/CD", "Terraform", "Ansible", "Linux"],
+    "Electronics Engineer": ["Circuit Design", "PCB", "VHDL", "Verilog", "Microcontrollers", "Embedded C", "MATLAB"],
+    "Mechanical Engineer": ["CAD", "AutoCAD", "SolidWorks", "Thermodynamics", "Fluid Mechanics", "FEA"],
+    "Marketing Manager": ["SEO", "SEM", "Content Strategy", "Google Analytics", "Social Media", "Campaigns"],
+    "Business Analyst": ["SQL", "Tableau", "Excel", "Agile", "UML", "BPMN", "Requirements"]
 }
 
 def extract_text_from_pdf(file_content):
-    with pdfplumber.open(io.BytesIO(file_content)) as pdf:
-        text = ""
-        for page in pdf.pages:
-            text += page.extract_text()
-    return text
+    try:
+        with pdfplumber.open(io.BytesIO(file_content)) as pdf:
+            text = ""
+            for page in pdf.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    text += page_text + " "
+        return text.strip()
+    except Exception as e:
+        print(f"Extraction error: {e}")
+        return ""
 
 def detect_role(text):
     text = text.lower()

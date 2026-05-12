@@ -45,11 +45,23 @@ def load_data_to_chroma():
 
 def get_questions(role, top_k=10):
     # Query ChromaDB based on role and text similarity
+    # Use a more descriptive query to get better matches
     results = collection.query(
-        query_texts=[f"interview questions for {role}"],
+        query_texts=[f"Technical interview questions for a {role} professional"],
         n_results=top_k
     )
-    return results['documents'][0] if results['documents'] else []
+    
+    if results['documents'] and len(results['documents'][0]) > 0:
+        return results['documents'][0]
+    
+    # Fallback questions if database query fails
+    return [
+        "Can you walk me through your most challenging project?",
+        "How do you handle technical debt in your workflow?",
+        "What is your approach to learning new technologies quickly?",
+        "Describe a time you had to resolve a difficult bug.",
+        "How do you ensure code quality in a team environment?"
+    ]
 
 def get_linkedin_tips(role):
     # Static tips based on role categories
