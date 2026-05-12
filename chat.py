@@ -15,7 +15,8 @@ TOPIC_KEYWORDS = [
     "aws", "docker", "kubernetes", "git", "agile", "scrum",
     "salary", "hr", "linkedin", "portfolio", "experience",
     "internship", "fresher", "engineer", "developer",
-    "manager", "mba", "marketing", "placement", "technical"
+    "manager", "mba", "marketing", "placement", "technical",
+    "hello", "hi", "hey", "thanks", "thank you", "help"
 ]
 
 def is_topic_related(text):
